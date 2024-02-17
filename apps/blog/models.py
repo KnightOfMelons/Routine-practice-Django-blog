@@ -6,7 +6,6 @@ from mptt.models import MPTTModel, TreeForeignKey
 from apps.services.utils import unique_slugify
 
 
-
 class Post(models.Model):
     """
     Модель постов для нашего блога
@@ -92,6 +91,12 @@ class Category(MPTTModel):
         verbose_name = 'Категория'
         verbose_name_plural = 'Категории'
         db_table = 'app_categories'
+
+    def get_absolute_url(self):
+        """
+        Получаем прямую ссылку на категорию
+        """
+        return reverse('post_by_category', kwargs={'slug': self.slug})
 
     def __str__(self):
         """
