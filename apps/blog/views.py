@@ -9,7 +9,6 @@ from django.contrib.messages.views import SuccessMessageMixin
 from ..services.mixins import AuthorRequiredMixin
 
 
-
 class PostListView(ListView):
     model = Post
     template_name = 'blog/post_list.html'
