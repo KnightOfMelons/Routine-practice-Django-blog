@@ -45,7 +45,11 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'apps.accounts',
     'taggit',
+    'django_recaptcha',
 ]
+
+RECAPTCHA_PUBLIC_KEY = '6LcSvnspAAAAANZ5PhM9sf3HkYoX8xS1ksEfuU5I'
+RECAPTCHA_PRIVATE_KEY = '6LcSvnspAAAAAApok4Yj8tg3i3sdHY6fb1JQp2bO'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
