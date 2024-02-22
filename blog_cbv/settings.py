@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-
+from info import first, second
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -50,8 +50,8 @@ INSTALLED_APPS = [
     'ckeditor',
 ]
 
-RECAPTCHA_PUBLIC_KEY = '6LcSvnspAAAAANZ5PhM9sf3HkYoX8xS1ksEfuU5I'
-RECAPTCHA_PRIVATE_KEY = '6LcSvnspAAAAAApok4Yj8tg3i3sdHY6fb1JQp2bO'
+RECAPTCHA_PUBLIC_KEY = first
+RECAPTCHA_PRIVATE_KEY = second
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
