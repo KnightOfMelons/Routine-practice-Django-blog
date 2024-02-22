@@ -5,6 +5,7 @@ from django.urls import reverse
 from mptt.models import MPTTModel, TreeForeignKey
 from apps.services.utils import unique_slugify
 from taggit.managers import TaggableManager
+from ckeditor.fields import RichTextField
 
 
 class PostManager(models.Manager):
@@ -31,8 +32,8 @@ class Post(models.Model):
 
     title = models.CharField(verbose_name='Название записи', max_length=255)
     slug = models.SlugField(verbose_name='URL', max_length=255, blank=True)
-    description = models.TextField(verbose_name='Краткое описание', max_length=500)
-    text = models.TextField(verbose_name='Полный текст записи')
+    description = RichTextField(config_name='awesome_ckeditor', verbose_name='Краткое описание', max_length=500)
+    text = RichTextField(config_name='awesome_ckeditor', verbose_name='Полный текст записи')
     category = TreeForeignKey('Category', on_delete=models.PROTECT, related_name='posts', verbose_name='Категория')
     thumbnail = models.ImageField(default='default.jpg',
                                   verbose_name='Изображение записи',
@@ -52,6 +53,7 @@ class Post(models.Model):
     objects = models.Manager()
     custom = PostManager()
     tags = TaggableManager()
+
 
     class Meta:
         db_table = 'blog_post'
@@ -132,12 +134,14 @@ class Comment(MPTTModel):
     )
 
     post = models.ForeignKey(Post, on_delete=models.CASCADE, verbose_name='Запись', related_name='comments')
-    author = models.ForeignKey(User, verbose_name='Автор комментария', on_delete=models.CASCADE, related_name='comments_author')
+    author = models.ForeignKey(User, verbose_name='Автор комментария', on_delete=models.CASCADE,
+                               related_name='comments_author')
     content = models.TextField(verbose_name='Текст комментария', max_length=3000)
     time_create = models.DateTimeField(verbose_name='Время добавления', auto_now_add=True)
     time_update = models.DateTimeField(verbose_name='Время обновления', auto_now=True)
     status = models.CharField(choices=STATUS_OPTIONS, default='published', verbose_name='Статус поста', max_length=10)
-    parent = TreeForeignKey('self', verbose_name='Родительский комментарий', null=True, blank=True, related_name='children', on_delete=models.CASCADE)
+    parent = TreeForeignKey('self', verbose_name='Родительский комментарий', null=True, blank=True,
+                            related_name='children', on_delete=models.CASCADE)
 
     class MTTMeta:
         """

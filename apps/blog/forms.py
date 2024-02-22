@@ -1,3 +1,4 @@
+from ckeditor.widgets import CKEditorWidget
 from django import forms
 from .models import Post
 from .models import Comment
@@ -7,6 +8,7 @@ class PostCreateForm(forms.ModelForm):
     """
     Форма добавления статей на сайте
     """
+    title = forms.CharField(widget=CKEditorWidget(config_name='awesome_ckeditor'))
 
     class Meta:
         model = Post
@@ -55,3 +57,4 @@ class CommentCreateForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ('content',)
+

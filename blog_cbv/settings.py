@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'apps.accounts',
     'taggit',
     'django_recaptcha',
+    'ckeditor_uploader',
+    'ckeditor',
 ]
 
 RECAPTCHA_PUBLIC_KEY = '6LcSvnspAAAAANZ5PhM9sf3HkYoX8xS1ksEfuU5I'
@@ -125,8 +127,16 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = (BASE_DIR / 'static')
+STATIC_ROOT = BASE_DIR / 'static/'
+CKEDITOR_UPLOAD_PATH = "uploads/"
 STATICFILES_DIRS = [BASE_DIR / 'templates/js/']
+
+CKEDITOR_CONFIGS = {
+    'awesome_ckeditor': {
+        'toolbar': 'full',
+        'height': 300,
+    },
+}
 
 MEDIA_ROOT = (BASE_DIR / 'media')
 MEDIA_URL = '/media/'
