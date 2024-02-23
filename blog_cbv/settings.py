@@ -61,8 +61,16 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',  # Middleware тулбара
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'apps.accounts.middleware.ActiveUserMiddleware', # New
 ]
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': (BASE_DIR / 'cache'),
+    }
+}
 
 ROOT_URLCONF = 'blog_cbv.urls'
 
