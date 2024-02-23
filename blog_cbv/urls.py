@@ -4,10 +4,17 @@ from django.conf.urls.static import static
 from django.conf import settings
 from apps.blog.feeds import LatestPostFeed
 
+
+handler403 = 'apps.blog.views.tr_handler403' # New
+handler404 = 'apps.blog.views.tr_handler404' # New
+handler500 = 'apps.blog.views.tr_handler500' # New
+
+
+
 urlpatterns = [
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('admin/', admin.site.urls),
-    path('feeds/latest/', LatestPostFeed(), name='latest_post_feed'), # New
+    path('feeds/latest/', LatestPostFeed(), name='latest_post_feed'),
     path('', include('apps.blog.urls')),
     path('', include('apps.accounts.urls')),
 ]
